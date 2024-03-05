@@ -1,6 +1,7 @@
 # get string input from user
 # remove the duplicates in given input string
 
+<<<<<<< HEAD
 # build a function for removing duplicates
 # def removeDuplicates(string):
 #     newString = ''
@@ -27,6 +28,8 @@ def removeDuplicates(string):
 #         length += 1
 #     return length
 
+=======
+>>>>>>> 4d96077 (change commit)
 # def removeDuplicates():
 #     dup = input("Enter any String :")
 #     res = set()
@@ -80,6 +83,7 @@ para2 = removeDuplicate(inputString2)
 <<<<<<< HEAD
 <<<<<<< HEAD
 print("With case :"+para2)
+<<<<<<< HEAD
 # call the remove duplicate function and store new string
 # newString = removeDuplicates(input("Enter a input : "))
 # print(newString)
@@ -94,3 +98,7 @@ print("With case :"+para2)
 >>>>>>> 91246ea (add)
 =======
 >>>>>>> ba52976 (ok)
+=======
+
+
+>>>>>>> 4d96077 (change commit)
