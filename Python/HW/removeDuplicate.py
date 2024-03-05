@@ -89,5 +89,8 @@ print("With case :"+para2)
 >>>>>>> fa4e68b (modify commit)
 =======
 print("With case :"+para2)
+<<<<<<< HEAD
 
 >>>>>>> 91246ea (add)
+=======
+>>>>>>> ba52976 (ok)
