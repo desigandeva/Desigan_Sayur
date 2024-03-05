@@ -77,8 +77,12 @@ inputString2 = inputString.split()
 para1 = removeDuplicate(inputString1)
 print("Without case : "+para1)
 para2 = removeDuplicate(inputString2)
+<<<<<<< HEAD
 print("With case :"+para2)
 # call the remove duplicate function and store new string
 # newString = removeDuplicates(input("Enter a input : "))
 # print(newString)
 # removeDuplicates()
+=======
+print("With case :"+para2)
+>>>>>>> fa4e68b (modify commit)
