@@ -63,11 +63,6 @@ def removeDuplicate(para):
     return newpara
 
 
-<<<<<<< HEAD
-para = removeDuplicate(input("enter input : ").split())
-print(para)
-
-=======
 inputString = input("enter input : ")
 inputString1 = inputString.lower().split()
 inputString2 = inputString.split()
@@ -75,7 +70,6 @@ para1 = removeDuplicate(inputString1)
 print("Without case : "+para1)
 para2 = removeDuplicate(inputString2)
 print("With case :"+para2)
->>>>>>> 552c27d (first commit)
 # call the remove duplicate function and store new string
 # newString = removeDuplicates(input("Enter a input : "))
 # print(newString)
