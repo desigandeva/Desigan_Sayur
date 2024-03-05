@@ -63,6 +63,11 @@ def removeDuplicate(para):
     return newpara
 
 
+<<<<<<< HEAD
+=======
+# call the remove duplicate function and store new string
+
+>>>>>>> d784cd5 (modify1)
 inputString = input("enter input : ")
 inputString1 = inputString.lower().split()
 inputString2 = inputString.split()
