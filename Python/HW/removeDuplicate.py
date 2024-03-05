@@ -10,6 +10,7 @@
 #     newString=newString+string[lengthOfString(string)-1]
 #     return newString
 
+<<<<<<< HEAD
 def removeDuplicates(string):
     newString = ''
     for element in string:
@@ -17,6 +18,8 @@ def removeDuplicates(string):
             newString+=element
     return newString
 
+=======
+>>>>>>> 552c27d (first commit)
 # build a function for length fo the string
 # def lengthOfString(string):
 #     length = 0
@@ -35,6 +38,16 @@ def removeDuplicates(string):
 #             res.add(i)
 #     print(res)
 
+<<<<<<< HEAD
+=======
+def removeDuplicates(string):
+    newString = ''
+    for element in string:
+        if element not in newString:
+            newString+=element
+    return newString
+
+>>>>>>> 552c27d (first commit)
 def removeDuplicate(para):
     newpara = ''
     for word in para:
@@ -42,14 +55,27 @@ def removeDuplicate(para):
         for character in word:
             if character not in newWord:
                 newWord += character
+<<<<<<< HEAD
         # print(newWord)
+=======
+>>>>>>> 552c27d (first commit)
         newpara = newpara + newWord + ' '
     return newpara
 
 
+<<<<<<< HEAD
 para = removeDuplicate(input("enter input : ").split())
 print(para)
 
+=======
+inputString = input("enter input : ")
+inputString1 = inputString.lower().split()
+inputString2 = inputString.split()
+para1 = removeDuplicate(inputString1)
+print("Without case : "+para1)
+para2 = removeDuplicate(inputString2)
+print("With case :"+para2)
+>>>>>>> 552c27d (first commit)
 # call the remove duplicate function and store new string
 # newString = removeDuplicates(input("Enter a input : "))
 # print(newString)
