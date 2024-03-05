@@ -78,6 +78,7 @@ para1 = removeDuplicate(inputString1)
 print("Without case : "+para1)
 para2 = removeDuplicate(inputString2)
 <<<<<<< HEAD
+<<<<<<< HEAD
 print("With case :"+para2)
 # call the remove duplicate function and store new string
 # newString = removeDuplicates(input("Enter a input : "))
@@ -86,3 +87,7 @@ print("With case :"+para2)
 =======
 print("With case :"+para2)
 >>>>>>> fa4e68b (modify commit)
+=======
+print("With case :"+para2)
+
+>>>>>>> 91246ea (add)
