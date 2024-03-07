@@ -9,18 +9,46 @@ list1 = input("Enter list (seperate by ,) : ").split(',')
 # get k value
 k = int(input("Enter k value : "))
 # assign empty list
-a=[]
-b=[]
+temp=[]
+result=[]
+new_list=[]
 # get uniqe in new list
-new_list = list(set(list1))
+for i in list1:
+    if i not in new_list:
+        new_list.append(i)
+# print(new_list)
 # count the numbers
 for i in new_list:
-    a.append(list1.count(i))
+    temp.append(list1.count(i))
+# print(temp)
+# find result 
+for j in range(k):
+    length = len(temp)
+    i=0
+    while length>i:
+        if temp[i]==max(temp):
+            result.append(new_list[i])
+            temp.remove(temp[i])
+            new_list.remove(new_list[i])
+            length=len(temp)
+        i+=1
+# print result
+print(" ".join(i for i in result[:k]))
 
-for j in range(len(a)):
-    b.append(int(str(a[j])+str(new_list[j])))
 
-b.sort(reverse=True)
-# print most frquently occuring numbers
-for i in range(k):
-    print(str(b[i])[-1],end=' ')
+
+
+
+
+
+
+
+# new_list = list(set(list1))
+
+# for j in range(len(temp)):
+#     result.append(int(str(temp[j])+str(new_list[j])))
+# print(result)
+# result.sort(reverse=True)
+# # print most frquently occuring numbers
+# for i in range(k):
+#     print(str(result[i])[-1],end=' ')
