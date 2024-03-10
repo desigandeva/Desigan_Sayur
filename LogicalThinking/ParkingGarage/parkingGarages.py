@@ -41,15 +41,15 @@ parking_slot = {}
 customer_data = {}
 
 def currentTime():
-    return datetime.now().strftime("%H:%M")
+    return datetime.now().strftime("%H:%M:%S")
 
 def totalCollection():
     print("Total Collection : ",total_collection)
     return 0
 
 def cal_charge(entryTime,exitTime):
-    entryHour, entryMin = map(int,entryTime.split(':'))
-    exitHour, exitMin = map(int,exitTime.split(':'))
+    entryHour, entryMin,entrySec = map(int,entryTime.split(':'))
+    exitHour, exitMin,exitSec = map(int,exitTime.split(':'))
     parking_time = (exitHour*60+exitMin)-(entryHour*60+entryMin)
     total_hour = parking_time//60
     total_min = parking_time%60
@@ -104,23 +104,21 @@ def exitParking():
     exitTime = currentTime()
     charge = cal_charge(entryTime,exitTime)
     total_collection+=charge
-    customer_data[name]={"EnterTime":entryTime,"ExitTime":exitTime,"ParkingCharge":charge}
+    customer_data[name]={"EntryTime":entryTime,"ExitTime":exitTime,"ParkingCharge":charge}
     parking_garage.append(slot)
     parking_slot.pop(slot)
     return 0
 
 def end():
     first_customer = list(customer_data.keys())[0]
-    fhour, fmin = map(int,customer_data[first_customer]["EntryTime"].split(':'))
-    chour, cmin = map(int,currentTime().split(':'))
-    return (fhour,fmin,chour,cmin)
+    fhour, fmin, fsec = map(int,customer_data[first_customer]["EntryTime"].split(':'))
+    chour, cmin, csec = map(int,currentTime().split(':'))
+    return (fhour,fmin,fsec,chour,cmin,csec)
 
 def main():
     print(" * Parking Garage * \n")
-    y=0
     while True:
-        y+=1
-        print(parking_garage,'\n',parking_slot,'\n',sep='')
+        print('\n',parking_garage,'\n',parking_slot,'\n',sep='')
         print("1. Entry Parking\n2. Exit Parking\n3. close")
         option = int(input("Enter your option : "))
         try:
@@ -133,9 +131,9 @@ def main():
                 break
             else:
                 print("Your option is out of range")
-            if(y>12000):
-                fhour,fmin,chour,cmin = end()
-                if(fhour==chour and fmin==cmin):
+            if customer_data:
+                fhour,fmin,fsec,chour,cmin,csec = end()
+                if(fhour==chour and fmin==cmin and fsec==csec):
                     break
         except Exception as e:
             print("Enter valid data",e)
