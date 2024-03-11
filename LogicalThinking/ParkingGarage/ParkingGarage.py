@@ -22,7 +22,7 @@
 # 
 # 
 
-# import time 
+import time 
 from datetime import datetime
 
 # parking charges
@@ -32,7 +32,7 @@ total_collection = 0
 # particular person charge
 charge = 0
 # total parking garage
-total_parking_garage = 10
+total_parking_garage = 1
 # build parking garage 
 parking_garage = [ slot+1 for slot in range(total_parking_garage)]
 # parking slot
@@ -47,7 +47,7 @@ def totalCollection():
     print("Total Collection : ",total_collection)
     return 0
 
-def cal_charge(entryTime,exitTime):
+def cal_charge(name,entryTime,exitTime):
     entryHour, entryMin,entrySec = map(int,entryTime.split(':'))
     exitHour, exitMin,exitSec = map(int,exitTime.split(':'))
     parking_time = (exitHour*60+exitMin)-(entryHour*60+entryMin)
@@ -77,20 +77,26 @@ def cal_charge(entryTime,exitTime):
             charge=total_hour*100
         elif(total_hour>1):
             charge=((total_hour-1)*150)+100
-    print("Your Parking Charge is ",charge,"Rs")
+    print(name,"your Parking Charge is ",charge,"Rs")
     return charge
 
 def slotAllocate(user,entryTime):
-    for slot in range(len(parking_garage)):
-        if isinstance(parking_garage[slot],int):
-            print(user,"your slot is",parking_garage[slot])
-            parking_slot[parking_garage[slot]]={"User":user,"EntryTime":entryTime}
-            parking_garage.remove(parking_garage[slot])
-            return 0
+    print("Finding Available Slot..")
+    time.sleep(1.8)
+    if parking_garage:
+        for slot in range(len(parking_garage)):
+            if isinstance(parking_garage[slot],int):
+                print(user,"your slot no is",parking_garage[slot])
+                parking_slot[parking_garage[slot]]={"User":user,"EntryTime":entryTime}
+                customer_data[user]={"EntryTime":entryTime,"ExitTime":None,"ParkingCharge":None}
+                parking_garage.remove(parking_garage[slot])
+                return 0
+    else:
+        print("Parking slots are full\nSo",user,"please wait...\nNo more entry until slots will free ")
 
 def entryParking():
     user = input("Enter your name : ").capitalize()
-    # entryTime = input("Enter a entry time (eg: 12:30) : ")
+    # entryTime = input("Enter a entry time (eg: 12:30:08) : ")
     entryTime = currentTime()
     slotAllocate(user,entryTime)
     return 0
@@ -98,11 +104,13 @@ def entryParking():
 def exitParking():
     global total_collection
     slot = int(input("Enter your slot : "))
+    print("Fectching your data..")
+    time.sleep(1)
     name = parking_slot[slot]["User"]
     entryTime = parking_slot[slot]["EntryTime"]
-    # exitTime = input("Enter a exit time (eg: 16:30) : ")
+    # exitTime = input("Enter a exit time (eg: 16:30:45) : ")
     exitTime = currentTime()
-    charge = cal_charge(entryTime,exitTime)
+    charge = cal_charge(name,entryTime,exitTime)
     total_collection+=charge
     customer_data[name]={"EntryTime":entryTime,"ExitTime":exitTime,"ParkingCharge":charge}
     parking_garage.append(slot)
@@ -110,15 +118,17 @@ def exitParking():
     return 0
 
 def end():
+    time.sleep(1.5)
     first_customer = list(customer_data.keys())[0]
     fhour, fmin, fsec = map(int,customer_data[first_customer]["EntryTime"].split(':'))
     chour, cmin, csec = map(int,currentTime().split(':'))
     return (fhour,fmin,fsec,chour,cmin,csec)
 
 def main():
-    print(" * Parking Garage * \n")
+    print("\n\t * Parking Garage * ")
     while True:
-        print('\n',parking_garage,'\n',parking_slot,'\n',sep='')
+        print('\nAvailable Slots :\n',parking_garage,'\nUser Data :\n',parking_slot,'\n',sep='')
+        time.sleep(0.5)
         print("1. Entry Parking\n2. Exit Parking\n3. close")
         option = int(input("Enter your option : "))
         try:
@@ -134,6 +144,7 @@ def main():
             if customer_data:
                 fhour,fmin,fsec,chour,cmin,csec = end()
                 if(fhour==chour and fmin==cmin and fsec==csec):
+                    totalCollection()
                     break
         except Exception as e:
             print("Enter valid data",e)
