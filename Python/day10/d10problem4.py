@@ -5,9 +5,9 @@
 
 
 list1 = ['10','2','3','+','-','5','*']
-# eq = ['1','2','+','5','*']
+# list1 = ['1','2','+','5','*']
 result = []
-for i in result:
+for i in list1:
     # '+' occur pop 2 element and add those num and push 
     if(i=='+'):
         s1 = result.pop()
