@@ -19,26 +19,40 @@ word_list = passage.split()
 
 
 # build a function to count a word
-def countWord(word_list,word):
+def countWord(word_list,input_word):
     # initialize count as 0
     count = 0
     # create empty list
     new_list = []
+    # create empty string 
+    previousWord =''
+    # for loop for find "the","a" and 'a' in any word
+    # for index in range(len(word_list)):
+    #     print(previousWord,count)
+    #     # find "the" or "a" in word_list
+    #     if (word_list[index]==input_word):
+    #         previousWord = input_word
+    #         if(previousWord == input_word ):
+    #             count = count + 1      
+    #     if ('a' in word_list[index]):
+    #         previousWord = 'a'
     # for loop for find "the","a" and 'a' in any word
     for index in range(len(word_list)):
         # find "the" or "a" in word_list
-        if (word_list[index]==word) or (word_list[index]=='a') or ('a' in word_list[index]):
+        if (word_list[index]==input_word) or ('a' in word_list[index]):
             # add word into new_list
             new_list.append(word_list[index])
     # for loop for find "the" followed by another "the"
-    for index in range(len(new_list)-1):
-        # find the word "the" followed by another "the"
-        if new_list[index]==new_list[index+1] and new_list[index+1]==word:
+    # for index in range(len(new_list)-1):
+            if len(new_list) >= 2 and new_list[-2] == input_word and new_list[-1] == input_word:
+                    count += 1
+            # find the word "the" followed by another "the"
+        # if new_list[index]==new_list[index+1] and new_list[index+1]==input_word:
             # increment the count
-            count += 1
+            # count += 1
     # print count
-    print("Count of 'the' followed by another 'the' is : ",count)
-    return 0
+    # print("Count of 'the' followed by another 'the' is : ",count)
+    return count
 
 # build a function to count a word
 def wordCount(word_list,word):
@@ -83,10 +97,10 @@ def wordCount(word_list,word):
     # add count to total_count
     total_count+=count
     # print total_count
-    print("Count of 'the' followed by another 'the' is : ",total_count)
-    return 0
+    return total_count
 
 # call the countWord()
-# countWord(word_list,'the')
+count = countWord(word_list,'the')
 # call the wordCount()
-wordCount(word_list,'the')
+# count = wordCount(word_list,'the')
+print("Count of 'the' followed by another 'the' is : ",count)
