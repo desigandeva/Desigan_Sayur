@@ -17,7 +17,10 @@
 # 
 
 # assume the string is stored in 'a'
-input_string = "((Abc[i]) or (Ab[2]))"
+# input_string = "((Abc[i]) or (Ab[2]))"
+# get input from user
+input_string = input("Enter Expression : ")
+
 
 # build the checkbal() to check the balance of '(',')','[',']','{','}'
 def checkBal(input_string):
@@ -50,5 +53,45 @@ def checkBal(input_string):
     else:
         return False
 
+# build the checkbal() to check the balance of '(',')','[',']','{','}'
+def checkPerfectExpression(input_string):
+    # initialize empty stack/list 
+    stack = []
+    try:
+        # check every element is balsed or not
+        for char in input_string:
+                # chech the open parenthesis
+                if char=="(":
+                    # add the char to stack/list
+                    stack.append(char)
+                # chech the close parenthesis
+                elif char==")":
+                    # remove the char from stack/list
+                    stack.pop()
+                # chech the open curly bracket
+                if char=="{":
+                    # add the char to stack/list
+                    stack.append(char)
+                # chech the close curly bracket
+                elif char=="}":
+                    # remove the char from stack/list
+                    stack.pop()
+                # chech the open square bracket
+                if char=="[":
+                    # add the char to stack/list
+                    stack.append(char)
+                # chech the close square bracket
+                elif char=="]":
+                    # remove the char from stack/list
+                    stack.pop()
+        # return true
+        return True
+    # any error will occure
+    except Exception as e:
+        print(e)
+        # return false
+        return False
+
 # print and call the checkBal() function
-print(checkBal(input_string))
+# print(checkBal(input_string))
+print(checkPerfectExpression(input_string))
