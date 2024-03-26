@@ -25,16 +25,15 @@ def countWord(word_list,input_word):
     # create empty list
     new_list = []
     # create empty string 
-    previousWord =''
+    # previousWord =''
     # for loop for find "the","a" and 'a' in any word
     # for index in range(len(word_list)):
-    #     print(previousWord,count)
     #     # find "the" or "a" in word_list
     #     if (word_list[index]==input_word):
     #         previousWord = input_word
     #         if(previousWord == input_word ):
     #             count = count + 1      
-    #     if ('a' in word_list[index]):
+    #     elif ('a' in word_list[index]):
     #         previousWord = 'a'
     # for loop for find "the","a" and 'a' in any word
     for index in range(len(word_list)):

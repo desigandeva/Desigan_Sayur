@@ -15,6 +15,9 @@
 # '[' -> 2 and ']' -> -2
 # '{' -> 3 and '}' -> -3
 # 
+# '(','[','{' -> push into stack/list
+# ')',']','}' -> pop from stack/list
+# 
 
 # assume the string is stored in 'a'
 # input_string = "((Abc[i]) or (Ab[2]))"

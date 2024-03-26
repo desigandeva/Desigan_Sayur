@@ -18,36 +18,58 @@ txt_file = open("./Python/day3/file.txt",'r')
 # read file using read() method
 # and remove '.' in file using replace() method
 # and chnage all the words to lower case using lower() method
-passage = txt_file.read().replace('.','').lower()
+passage = txt_file.read().replace('.','').replace(',','').replace('!','').replace('?','').lower()
 # get word's seperate and stored in list using split() method
 word_list = passage.split()
 
 # assign empty list for store the 4 letter words
-new_list = []
+list_of_4_letter_word = []
 
 # build a function for find four letter words
 def findFourLetterWord(word_list):
     # strore the 4 letter words in list new_list[]
     for word in word_list:
         if len(word)==4:
-            new_list.append(word)
-    return new_list
+            list_of_4_letter_word.append(word)
+    return list_of_4_letter_word
 
 # build a function for count the four letter words
-def countFourLetterWords(new_list):
-    # store the unique words in set 'word_set'
-    word_set = set(new_list)
+def wordCount(word_list,count_word):
+    # initialy count 0 ( for every idretion it's make 0 )
+    count = 0
     # count the no of times the unique word occurred
-    for word in word_set:
-        # initialy count 0 ( for every idretion it's make 0 )
-        count = 0
-        for index in range(len(new_list)):
-            if new_list[index]==word:
-                # increment the count value
-                count+=1
+    for word in word_list:
+        if word==count_word:
+            # increment the count value
+            count+=1
         # print the unique word and it's count
-        print(word,":",count)
-    return 0
+        # print(word,":",count)
+    # return count
+    return count
+
+# print the four letter word and it's count
+def printWordAndCount(word_set,word_list):
+    for word in word_set:
+        # print the unique word and it's count
+        print(word,":",wordCount(word_list,word))
+
+# count four letter word 
+def countWord(word_list):
+    # initialze empty dictionary
+    word_dict = {}
+    # get word from word_list
+    for word in word_list:
+        # check length of the word is 4
+        if len(word) == 4:
+            # add word and word count into word_dictionary
+            word_dict[word]=word_list.count(word)
+    # return word_dictionary
+    return word_dict
 
 # call the function 
-countFourLetterWords(findFourLetterWord(word_list))
+# countFourLetterWords(findFourLetterWord(word_list))
+four_letter_word_list = findFourLetterWord(word_list)
+# store the unique words in set 'word_set'
+word_set = set(four_letter_word_list)
+printWordAndCount(word_set,word_list)
+# print(countWord(word_list))

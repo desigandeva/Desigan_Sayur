@@ -14,20 +14,20 @@
 in_list = [[1,3],[2,6],[8,10],[15,20],[16,25]]
 
 # build a function for merge overlapped intervals
-def mergeInterval(lst):
+def mergeInterval(input_list):
     # output list
     out_list = []
     item=0
-    while item< len(lst):
+    while item< len(input_list):
         # temp empty list
         temp_list = []
-        if item<len(lst)-1:
+        if item<len(input_list)-1:
             # find overlapped interval and rearrange
-            if lst[item][1]>lst[item+1][0]:
+            if input_list[item][1]>input_list[item+1][0]:
                 # add starting interval to temp_list
-                temp_list.append(lst[item][0])
+                temp_list.append(input_list[item][0])
                 # add ending interval to temp_list
-                temp_list.append(lst[item+1][1])
+                temp_list.append(input_list[item+1][1])
                 # add temp_list to out_list
                 out_list.append(temp_list)
                 # increment item by 1
@@ -35,9 +35,9 @@ def mergeInterval(lst):
             # do nothing
             else:
                 # add starting interval to temp_list
-                temp_list.append(lst[item][0])
+                temp_list.append(input_list[item][0])
                 # add ending interval to temp_list
-                temp_list.append(lst[item][1])
+                temp_list.append(input_list[item][1])
                 # add temp_list to out_list
                 out_list.append(temp_list)
         # increment item by 1
