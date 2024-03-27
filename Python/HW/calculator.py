@@ -246,5 +246,5 @@ def advancedCalc():
         # print error
         print(e)        
 
-# call main()
+# call advancedCalc()
 advancedCalc()
