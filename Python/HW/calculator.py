@@ -5,7 +5,7 @@
 # 
 # (2+(5*2)/5-2) -> 2
 # 
-# 
+# ((5+15*5)/(6+4)-(1+(5/5))) -> 6
 # 
 
 # build calulate function
@@ -40,27 +40,27 @@ def calculate(num1,opperator,num2):
         return num1**num2
 
 # build solve opperatoes function
-def solveOpperators(input_list,opperator):
-    # print('\n',input_list)
+def solvePower(input_list):
+    print('\n',input_list)
     # initialize empty list
     new_list = []
     # initialize index as 0
     index = 0
     # check the given opperator not pressent in the given input_list
-    if input_list.count(opperator)==0:
+    if input_list.count('**')==0:
         # return input_list
-        return input_list
+        return solveMulAndDiv(input_list)
     else:
         # check index is less than lenngth of input_list
         while index < len(input_list):
             # find the opperator index in input list
-            if input_list[index]==opperator:
+            if input_list[index]=='**':
                 # remove the last added item in new_list stored into num1
                 num1 = int(new_list.pop())
                 # get the next item in input_list stored into num2
                 num2 = int(input_list[index+1])
                 # call the calculate() get the value and stored in new_list
-                new_list.append(calculate(num1,opperator,num2))
+                new_list.append(calculate(num1,'**',num2))
                 # incremect the ibdex by 1
                 index+=1
             else:
@@ -69,11 +69,87 @@ def solveOpperators(input_list,opperator):
             # incremect the ibdex by 1
             index+=1
         # return call the solveOpperators() pass the new_list and opperator
-        return solveOpperators(new_list,opperator)
+        return solvePower(new_list)
+
+# build solve opperatoes function
+def solveMulAndDiv(input_list):
+    print('\n',input_list)
+    # initialize empty list
+    new_list = []
+    # initialize index as 0
+    index = 0
+    # check the given opperator not pressent in the given input_list
+    if input_list.count('*')==0 and input_list.count('/')==0:
+        # return input_list
+        return solveAddAndSub(input_list)
+    else:
+        # check index is less than lenngth of input_list
+        while index < len(input_list):
+            # find the opperator index in input list
+            if input_list[index]=='*' or input_list[index]=='/':
+                # remove the last added item in new_list stored into num1
+                num1 = int(new_list.pop())
+                # get the next item in input_list stored into num2
+                num2 = int(input_list[index+1])
+                # call the calculate() get the value and stored in new_list
+                new_list.append(calculate(num1,input_list[index],num2))
+                # incremect the ibdex by 1
+                index+=1
+            else:
+                # add item into new_list
+                new_list.append(input_list[index])
+            # incremect the ibdex by 1
+            index+=1
+        # return call the solveOpperators() pass the new_list and opperator
+        return solveMulAndDiv(new_list)
+
+# build solve opperatoes function
+def solveAddAndSub(input_list):
+    print('\n',input_list)
+    # initialize empty list
+    new_list = []
+    # initialize index as 0
+    index = 0
+    # check the given opperator not pressent in the given input_list
+    if input_list.count('+')==0 and input_list.count('-')==0:
+        # return input_list
+        return input_list
+    else:
+        # check index is less than lenngth of input_list
+        while index < len(input_list):
+            # find the opperator index in input list
+            if input_list[index]=='+' or input_list[index]=='-':
+                # remove the last added item in new_list stored into num1
+                num1 = int(new_list.pop())
+                # get the next item in input_list stored into num2
+                num2 = int(input_list[index+1])
+                # call the calculate() get the value and stored in new_list
+                new_list.append(calculate(num1,input_list[index],num2))
+                # incremect the ibdex by 1
+                index+=1
+            else:
+                # add item into new_list
+                new_list.append(input_list[index])
+            # incremect the ibdex by 1
+            index+=1
+        # return call the solveOpperators() pass the new_list and opperator
+        return solveAddAndSub(new_list)
+
+# build the function for finding last occurance of character
+def findIndex(input_list,find_char):
+    # revers the input_list and stored into new_list
+    new_list = input_list[::-1]
+    # for loop
+    for index in range(len(new_list)):
+        # find the character
+        if new_list[index]==find_char:
+            # return index possesion of given character in input_list
+            return (len(new_list)-index-1)
+
 
 # build the function solvebrackets()
-def solveBrackets(input_list,bracket):
-    # print('\n',input_list)
+def solveBrackets(input_list):
+    print('\n',input_list)
     # initialize empty list
     new_list = []
     # initialize index as 0
@@ -81,58 +157,33 @@ def solveBrackets(input_list,bracket):
     # initialize result as 0
     result = 0
     # check given bracket is not present in input_list
-    if input_list.count(bracket)==0:
+    if input_list.count(')')==0:
         # return input_list
-        return input_list
+        return solvePower(input_list)
     else:
         # check index is lessthan length of input_list
         while index < len(input_list):
             # check the bracket index
-            if input_list[index]==bracket:
-                # remove the last added item and stored in num1
-                num1 = int(new_list.pop())
-                # remove the last added item and stored in opp
-                opp = new_list.pop()
-                # remove the last added item and stored in num2
-                num2 = int(new_list.pop())
-                # call calculate() get the value and stored into result
-                result = calculate(num2,opp,num1)
-                # remove the last added item
-                new_list.pop()
+            if input_list[index]==')':
+                # find the index of nearest oppen bracket
+                start_index = findIndex(new_list,'(')
+                # add the element in temp_list
+                temp_list = new_list[start_index+1:]
+                # remove the solved item in new_list
+                for iterator in range(start_index,len(new_list)):
+                    # remove the last added item
+                    new_list.pop()
+                # solve the temp_list call solvePower()
+                result = solvePower(temp_list)
                 # add result into new_list
-                new_list.append(result)
+                new_list.append(result[0])
             else:
                 # add item into new_list
                 new_list.append(input_list[index])
             # increment index by 1
             index+=1
         # return solveBrackets() pass new_list and bracket
-        return solveBrackets(new_list,bracket)
-
-# build a function advance calculator
-def advanceCalc(input_list):
-    # orderOpperation = ['**','*','/','//','%','+','-']
-    # call solveBracket() pass input_list and ')' store into new_list
-    new_list = solveBrackets(input_list,')')
-    # call solveOpperatoes() pass new_list and '**' store into new_list1
-    new_list1 = solveOpperators(new_list,'**')
-    # call solveOpperatoes() pass new_list1 and '*' store into new_list2
-    new_list2 = solveOpperators(new_list1,'*')
-    # call solveOpperatoes() pass new_list2 and '/' store into new_list3
-    new_list3 = solveOpperators(new_list2,'/')
-    # call solveOpperatoes() pass new_list3 and '//' store into new_list4
-    # new_list4 = solveOpperators(new_list3,'//')
-    # call solveOpperatoes() pass new_list4 and '%' store into new_list5
-    # new_list5 = solveOpperators(new_list4,'%')
-    # call solveOpperatoes() pass new_list3 and '+' store into new_list6
-    new_list6 = solveOpperators(new_list3,'+')
-    # call solveOpperatoes() pass new_list6 and '-' store into new_list7
-    new_list7 = solveOpperators(new_list6,'-')
-    # return new_list7
-    return new_list7[0]
-
-
-
+        return solveBrackets(new_list)
 
 # build the checkbal() to check the balance of '(',')','[',']','{','}'
 def checkPerfectExpression(input_string):
@@ -173,8 +224,8 @@ def checkPerfectExpression(input_string):
         # return false
         return False
 
-# build main() function
-def main():
+# build a function advance calculator
+def advancedCalc():
     # execute try block
     try:
         # infinite loop
@@ -186,7 +237,7 @@ def main():
                 # change string into list
                 input_list = input_string.split()
                 # call the advanceCalc() pass input_list
-                print("Result : ",advanceCalc(input_list))
+                print("Result : ",solveBrackets(input_list)[0])
             else:
                 # print invalid expression
                 print("Enter valid expresstion")
@@ -196,4 +247,4 @@ def main():
         print(e)        
 
 # call main()
-main()
+advancedCalc()
