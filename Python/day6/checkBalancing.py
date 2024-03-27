@@ -69,33 +69,42 @@ def checkPerfectExpression(input_string):
                     stack.append(char)
                 # chech the close parenthesis
                 elif char==")":
-                    if stack[-1]!='(':
-                        return False
-                    else:
+                    # check last item is '('
+                    if stack[-1]=='(':
                         # remove the char from stack/list
                         stack.pop()
+                    # else
+                    else:
+                        # return false
+                        return False
                 # chech the open curly bracket
                 if char=="{":
                         # add the char to stack/list
                         stack.append(char)
                 # chech the close curly bracket
                 elif char=="}":
-                    if stack[-1]!='{':
-                        return False
-                    else:
+                    # check last item is '{'
+                    if stack[-1]=='{':
                         # remove the char from stack/list
                         stack.pop()
+                    # else
+                    else:
+                        #  return false
+                        return False
                 # chech the open square bracket
                 if char=="[":
                     # add the char to stack/list
                     stack.append(char)
                 # chech the close square bracket
                 elif char=="]":
-                    if stack[-1]!='[':
-                        return False
-                    else:
+                    # check last item is '['
+                    if stack[-1]=='[':
                         # remove the char from stack/list
                         stack.pop()
+                    # else
+                    else:
+                        # return false
+                        return False
         # return true
         return True
     # any error will occure
