@@ -198,24 +198,33 @@ def checkPerfectExpression(input_string):
                     stack.append(char)
                 # chech the close parenthesis
                 elif char==")":
-                    # remove the char from stack/list
-                    stack.pop()
+                    if stack[-1]!='(':
+                        return False
+                    else:
+                        # remove the char from stack/list
+                        stack.pop()
                 # chech the open curly bracket
                 if char=="{":
-                    # add the char to stack/list
-                    stack.append(char)
+                        # add the char to stack/list
+                        stack.append(char)
                 # chech the close curly bracket
                 elif char=="}":
-                    # remove the char from stack/list
-                    stack.pop()
+                    if stack[-1]!='{':
+                        return False
+                    else:
+                        # remove the char from stack/list
+                        stack.pop()
                 # chech the open square bracket
                 if char=="[":
                     # add the char to stack/list
                     stack.append(char)
                 # chech the close square bracket
                 elif char=="]":
-                    # remove the char from stack/list
-                    stack.pop()
+                    if stack[-1]!='[':
+                        return False
+                    else:
+                        # remove the char from stack/list
+                        stack.pop()
         # return true
         return True
     # any error will occure
@@ -223,6 +232,7 @@ def checkPerfectExpression(input_string):
         print(e)
         # return false
         return False
+    
 
 # build a function advance calculator
 def advancedCalc():
