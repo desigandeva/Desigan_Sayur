@@ -28,11 +28,11 @@ import time
 board = []
 # assign player variable for current player 
 # initialy player 'A' throw the dice next player 'B'
-currentplayer = 'B'
+current_player = 'B'
 # assign scorea for player 'A' -> 0
-scorea = 0
+score_a = 0
 # assign scoreb for player 'B' -> 0
-scoreb = 0
+score_b = 0
 
 # build a method to make a board
 def makeBoard(rows,clms):
@@ -71,46 +71,46 @@ def switchplayer(currentplayer):
 
 # build the function for play the game
 def playgame():
-    global scorea
-    global scoreb
-    global currentplayer
+    global score_a
+    global score_b
+    global current_player
 
     # call switchplayer() function to change player
-    currentplayer = switchplayer(currentplayer)
+    current_player = switchplayer(current_player)
     # print current player
-    print("Player",currentplayer,"throw the dice",end=' ')
+    print("Player",current_player,"throw the dice",end=' ')
     # call throughdice() function get row and column    
     rows, colms = throughdice()
 
-    if(board[rows][colms]=='A' and currentplayer=='B'):
+    if(board[rows][colms]=='A' and current_player=='B'):
         # change 'A' to 'B'
-        board[rows][colms]=currentplayer
+        board[rows][colms]=current_player
         # add score 1 to player 'B'
-        scoreb+=1
+        score_b+=1
 
-    if(board[rows][colms]=='B' and currentplayer=='A'):
+    if(board[rows][colms]=='B' and current_player=='A'):
         # change 'B' to 'A'
-        board[rows][colms]=currentplayer
+        board[rows][colms]=current_player
         # add score 1 to player 'A'
-        scorea+=1
+        score_a+=1
 
     if board[rows][colms]=='*':
         # init current player
-        board[rows][colms]=currentplayer
+        board[rows][colms]=current_player
 
 # main method
 def main():
     makeBoard(6,6)
     while True:
         # print the score 'A' and 'B'
-        print("Player 'A' score is :",scorea)
-        print("Player 'B' score is :",scoreb)
+        print("Player 'A' score is :",score_a)
+        print("Player 'B' score is :",score_b)
         
         # check anyone is won the match
-        if(scorea==5):
+        if(score_a==5):
             print("Player 'A' won the match")
             break
-        if(scoreb==5):
+        if(score_b==5):
             print("Player 'B' won the match")
             break
         
