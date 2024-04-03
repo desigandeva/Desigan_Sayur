@@ -27,26 +27,27 @@ import time
 # oseat = [["0".join(chr(65+i)+str(j+1)) if j<9 else chr(65+i)+str(j+1) for j in range(30)] for i in range(15)]
 seat = []
 # ticket booked
-seatbooked =  "   " # None # "[B]"
+seat_booked =  "   " # None # "[B]"
 # 1st class ticket price
-firstclass = 300
+first_class = 300
 # 2nd class ticket price
-secondclass = 200
+second_class = 200
 # 3rd class ticket price
-thirdclass = 100
+third_class = 100
 
 # make seat availability
 def makeSeatAvailability(rows,cols):
     for row in range(rows):
-        temp = []
+        # assign temp list
+        temp_list = []
         for col in range(cols):
             # make seat value
             if col<9:
-                temp.append("0".join(chr(65+row)+str(col+1)))
+                temp_list.append("0".join(chr(65+row)+str(col+1)))
             else:
-                temp.append(chr(65+row)+str(col+1))
+                temp_list.append(chr(65+row)+str(col+1))
         # add row
-        seat.append(temp)
+        seat.append(temp_list)
 
 # build a function for display the seat availabilty
 def displayseat():
@@ -63,38 +64,38 @@ def displayseat():
 def bookticket(ticket):
     for row in range(len(seat)):
         for col in range(len(seat[row])):
-            # print(seat[row][col])
             # book the seat
             if(seat[row][col]==ticket):
                 print("Ticket Sucessfully Booked :",ticket)
                 # ticket_price = ticketprice(ticket)
-                seat[row][col]=seatbooked
+                seat[row][col]=seat_booked
                 # for first 3 rows
                 if(row<3):
                     # for corner 3 seat
-                    if(col<3 or col>len(seat[row])-3):
-                        ticket_price = discountprice(thirdclass)
+                    if(col<3 or col>len(seat[row])-4):
+                        # apply discount
+                        ticket_price = discountprice(third_class)
                     else:
-                        ticket_price = thirdclass
+                        ticket_price = third_class
                 # for row 4 to 12
                 if(row>=3 and row<12):
                     # for corner 3 seat
-                    if(col<3 or col>len(seat[row])-3):
-                        ticket_price = discountprice(secondclass)
+                    if(col<3 or col>len(seat[row])-4):
+                        # apply discount
+                        ticket_price = discountprice(second_class)
                     else:
-                        ticket_price = secondclass
+                        ticket_price = second_class
                 # last 3 rows
                 if(row>=12):
                     # for corner 3 seat
-                    if(col<3 or col>len(seat[row])-3):
-                        ticket_price = discountprice(firstclass)
+                    if(col<3 or col>len(seat[row])-4):
+                        # apply discount
+                        ticket_price = discountprice(first_class)
                     else:
-                        ticket_price = firstclass
+                        ticket_price = first_class
+                # return ticket price
                 return ticket_price
-            # check seat is availabal or not
-            # if(seat[row][col]==seatbooked):
-            #     print("Seat already Booked\n")
-    return 0
+
             
 
 # build discountprice() for discount the corner seats 
@@ -109,7 +110,7 @@ def main():
         # call the displayseat() function
         displayseat()
         # total ticket price
-        totalprice = 0
+        total_price = 0
         # get seat no from user
         try:
             # get ticket number from user
@@ -126,12 +127,12 @@ def main():
                 # call the bookticket() function to make booking
                 ticket_price = bookticket(tickets_list[ticket])
                 #  add ticketprice to totalprice
-                totalprice += ticket_price
+                total_price += ticket_price
                 # sleep 3s
                 time.sleep(3)
             
             # print the total tickets price
-            print("Total Ticket Price is :", totalprice)
+            print("Total Ticket Price is :", total_price)
             # sleep 2s
             time.sleep(2)
         
