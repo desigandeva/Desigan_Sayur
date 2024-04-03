@@ -17,6 +17,7 @@ in_list = [[1,3],[2,6],[8,10],[15,20],[16,25]]
 def mergeInterval(input_list):
     # output list
     out_list = []
+    # initialize item as 0
     item=0
     while item< len(input_list):
         # temp empty list
